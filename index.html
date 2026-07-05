@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DJ MAROS — Acid Techno DJ · Valencia</title>
-<meta name="description" content="DJ Maros — Valencia-based acid techno DJ. 138–150 BPM. Bookings: gergely@maros.hu">
+<meta name="description" content="DJ Maros — Valencia-based acid techno DJ. 138–150 BPM. Mixes, dates and bookings.">
+<script data-goatcounter="https://djmaros.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <meta name="theme-color" content="#070908">
 <meta property="og:title" content="DJ MAROS — Acid Techno DJ · Valencia">
 <meta property="og:description" content="Valencia-based acid techno. 138–150 BPM. Listen to mixes and book a set.">
@@ -86,6 +87,8 @@ nav .links a::after{content:'';position:absolute;left:0;right:100%;bottom:-5px;h
 nav .links a:hover,nav .links a:focus-visible,nav .links a.active{color:var(--acid)}
 nav .links a:hover::after,nav .links a.active::after{right:0}
 nav a:focus-visible{outline:2px solid var(--acid);outline-offset:3px}
+.lang{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--acid);background:transparent;border:1px solid var(--line);border-radius:4px;padding:5px 9px;cursor:pointer;transition:all .15s;text-transform:uppercase}
+.lang:hover{border-color:var(--acid);background:var(--acid-dim)}
 @media(max-width:640px){nav .links{gap:16px}nav .links a span{display:none}}
 
 /* ---------- hero ---------- */
@@ -211,15 +214,52 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;bac
 .player-note a{color:var(--acid);text-decoration:none}
 .player-note a:hover{text-decoration:underline}
 
+/* ---------- booking form ---------- */
+.book-form{max-width:640px;margin:0 auto;text-align:left}
+.bf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.book-form label{display:flex;flex-direction:column;gap:6px}
+.book-form label span{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--grey);text-transform:uppercase}
+.book-form input,.book-form textarea{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--chrome);font-family:var(--body);font-size:14px;transition:border-color .15s;width:100%}
+.book-form input::placeholder,.book-form textarea::placeholder{color:#5a6a62}
+.book-form input:focus,.book-form textarea:focus{outline:none;border-color:var(--acid);box-shadow:0 0 14px rgba(70,242,168,.15)}
+.bf-msg{margin-top:14px}
+.book-form textarea{resize:vertical;min-height:96px}
+.bf-send{margin-top:18px;width:100%;padding:15px;background:transparent;border:1px solid var(--acid);color:var(--acid);font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .15s}
+.bf-send:hover{background:var(--acid);color:#04140c;box-shadow:0 0 26px rgba(70,242,168,.4)}
+.bf-status{font-family:var(--mono);font-size:11px;color:var(--acid);letter-spacing:.12em;margin-top:12px;min-height:14px;text-align:center}
+.bf-alt{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spacing:.14em;margin:20px 0 32px;text-transform:uppercase}
+.bf-alt a{color:var(--acid);text-decoration:none}
+.bf-alt a:hover{text-decoration:underline}
+
 /* ---------- mobile polish ---------- */
 @media(max-width:560px){
   .hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:22px 12px}
+  .bf-grid{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   .halftone{background:
     radial-gradient(circle at center, var(--acid) 1px, transparent 1.2px) 0 0/12px 12px,
     radial-gradient(circle at center, rgba(70,242,168,.3) .8px, transparent 1px) 6px 6px/12px 12px,
     #06110b}
+  section{padding:72px 18px 0}
+  nav .links{gap:13px}
+  nav .links a{font-size:11px;letter-spacing:.09em}
+  .lang{padding:4px 7px;font-size:10px}
+  .hero-band img{width:min(340px,82vw)}
+  .machine{padding:18px 14px}
+  .machine-top{gap:14px}
+  .ctrl{min-width:calc(50% - 7px);max-width:none}
+  .mt-play{width:54px;height:54px}
+  footer{justify-content:center;text-align:center;gap:8px}
+}
+@media(max-width:480px){
+  nav{padding:12px 12px}
+  nav.scrolled{padding:9px 12px}
+  nav .brand{min-height:24px}
+  nav .brand img{height:24px}
+  nav .links{gap:9px}
+  nav .links a{font-size:10px;letter-spacing:.05em}
+  .lang{padding:3px 6px;font-size:9px}
 }
 
 /* ---------- kick pulse ---------- */
@@ -294,6 +334,7 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
     <a href="#sets">Sets</a>
     <a href="#bio">Bio</a>
     <a href="#booking">Booking</a>
+    <button id="langBtn" class="lang" type="button" aria-label="Switch language / cambiar idioma">ES</button>
   </div>
 </nav>
 
@@ -337,7 +378,7 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
       <div class="mix-list" id="mixList"></div>
     </div>
     <iframe class="sc-hidden" id="scFrame" title="DJ Maros on SoundCloud" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fdj_maros%2Fmix01&auto_play=false&show_teaser=false"></iframe>
+      data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fdj_maros%2Fmix01&auto_play=false&show_teaser=false"></iframe>
   </div>
   <div class="player-note reveal" style="--d:.2s">Full mixes on <a href="https://soundcloud.com/dj_maros" target="_blank" rel="noopener">SoundCloud / DJ_MAROS</a></div>
 </section>
@@ -402,7 +443,18 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
 <section id="booking" class="booking">
   <div class="eyebrow reveal" style="justify-content:center">05 — Booking</div>
   <h2 class="reveal" style="--d:.08s">Book a set</h2>
-  <a class="mail reveal" style="--d:.14s" href="mailto:gergely@maros.hu">gergely@maros.hu</a>
+  <form class="book-form reveal" style="--d:.12s" id="bookForm">
+    <div class="bf-grid">
+      <label><span class="bf-l-name">Name</span><input name="name" type="text" required autocomplete="name"></label>
+      <label><span class="bf-l-email">Email</span><input name="email" type="email" required autocomplete="email"></label>
+      <label><span class="bf-l-date">Date</span><input name="date" type="text" placeholder="2026 / 09 / 12"></label>
+      <label><span class="bf-l-venue">Venue / City</span><input name="venue" type="text" placeholder="Club — Valencia"></label>
+    </div>
+    <label class="bf-msg"><span class="bf-l-msg">Message</span><textarea name="message" rows="4" required></textarea></label>
+    <button class="bf-send" type="submit">Send booking request</button>
+    <p class="bf-status" id="bfStatus" role="status"></p>
+  </form>
+  <p class="bf-alt reveal" style="--d:.16s"><span class="t">Or email directly:</span> <a id="mailLink" href="#">…</a></p>
   <div class="socials reveal" style="--d:.2s">
     <a href="https://soundcloud.com/dj_maros" target="_blank" rel="noopener">SoundCloud / DJ_MAROS</a>
     <a href="https://instagram.com/mg.flac" target="_blank" rel="noopener">Instagram / MG.FLAC</a>
@@ -416,24 +468,15 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
   <span>138–150 BPM</span>
 </footer>
 
-<script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-/* ---- custom SoundCloud player (widget API drives the hidden iframe) ---- */
+/* GoatCounter event helper — safe no-op until the analytics account exists */
+function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.count({path:name, title:name, event:true}); }
+
+/* ---- custom SoundCloud player (lazy: widget + stream only load when Listen nears the viewport) ---- */
 (function(){
   const frame=document.getElementById('scFrame'), panel=document.getElementById('scPlayer');
   const btn=document.getElementById('scPlay'), fill=document.getElementById('scFill');
   const timeEl=document.getElementById('scTime'), barEl=document.getElementById('scBar');
-  if(!window.SC || !SC.Widget){
-    // API failed to load — fall back to the plain embedded player
-    frame.classList.remove('sc-hidden'); frame.width='100%'; frame.height='166';
-    panel.querySelector('.sc-main').style.display='none';
-    panel.querySelector('.sc-art').style.display='none';
-    return;
-  }
-  const w=SC.Widget(frame);
-  let dur=0;
-  const fmt=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
-  const setTime=pos=>{timeEl.innerHTML='<b>'+fmt(pos)+'</b> / '+fmt(dur)};
 
   /* mix list — add a line to MIXES when a new mix drops and it appears below the player */
   const MIXES=[
@@ -441,8 +484,11 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
     // {title:'Acid Techno Mix 02', url:'https://soundcloud.com/dj_maros/mix02'},
   ];
   const list=document.getElementById('mixList');
-  let current=0;
+  let w=null, dur=0, current=0, booted=false, played=false;
+  const fmt=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+  const setTime=pos=>{timeEl.innerHTML='<b>'+fmt(pos)+'</b> / '+fmt(dur)};
   function refresh(){
+    if(!w) return;
     w.getDuration(d=>{dur=d;setTime(0)});
     w.getCurrentSound(s=>{
       if(!s) return;
@@ -453,6 +499,31 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
       if(s.artwork_url) document.getElementById('scArt').src=s.artwork_url.replace('-large','-t500x500');
     });
   }
+  function fallback(){
+    frame.src=frame.dataset.src; frame.classList.remove('sc-hidden'); frame.width='100%'; frame.height='166';
+    panel.querySelector('.sc-main').style.display='none';
+    panel.querySelector('.sc-art').style.display='none';
+  }
+  function boot(){
+    if(booted) return; booted=true;
+    const s=document.createElement('script');
+    s.src='https://w.soundcloud.com/player/api.js';
+    s.onload=()=>{
+      if(!window.SC || !SC.Widget){fallback();return}
+      frame.src=frame.dataset.src;
+      w=SC.Widget(frame);
+      w.bind(SC.Widget.Events.READY,refresh);
+      w.bind(SC.Widget.Events.PLAY,()=>{btn.classList.add('on');btn.textContent='❚❚';panel.classList.add('playing');
+        if(!played){played=true;track('mix-play')}});
+      w.bind(SC.Widget.Events.PAUSE,()=>{btn.classList.remove('on');btn.textContent='▶';panel.classList.remove('playing')});
+      w.bind(SC.Widget.Events.FINISH,()=>{fill.style.width='0%';setTime(0)});
+      w.bind(SC.Widget.Events.PLAY_PROGRESS,e=>{
+        if(dur){fill.style.width=(e.currentPosition/dur*100)+'%';setTime(e.currentPosition)}
+      });
+    };
+    s.onerror=fallback;
+    document.head.appendChild(s);
+  }
   MIXES.forEach((m,i)=>{
     const b=document.createElement('button');
     b.type='button';
@@ -460,6 +531,7 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
     b.innerHTML='<span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t"></span>';
     b.querySelector('.t').textContent=m.title||('Mix '+(i+1));
     b.addEventListener('click',()=>{
+      if(!w){boot();return}
       if(i===current){w.toggle();return}
       current=i;
       [...list.children].forEach((c,j)=>c.classList.toggle('active',j===i));
@@ -468,27 +540,26 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
     });
     list.appendChild(b);
   });
-  w.bind(SC.Widget.Events.READY,refresh);
-  w.bind(SC.Widget.Events.PLAY,()=>{btn.classList.add('on');btn.textContent='❚❚';panel.classList.add('playing')});
-  w.bind(SC.Widget.Events.PAUSE,()=>{btn.classList.remove('on');btn.textContent='▶';panel.classList.remove('playing')});
-  w.bind(SC.Widget.Events.FINISH,()=>{fill.style.width='0%';setTime(0)});
-  w.bind(SC.Widget.Events.PLAY_PROGRESS,e=>{
-    if(dur){fill.style.width=(e.currentPosition/dur*100)+'%';setTime(e.currentPosition)}
-  });
-  btn.addEventListener('click',()=>w.toggle());
+  btn.addEventListener('click',()=>{ if(w) w.toggle(); else boot(); });
   barEl.addEventListener('click',ev=>{
+    if(!w || !dur) return;
     const r=barEl.getBoundingClientRect();
     const f=Math.min(1,Math.max(0,(ev.clientX-r.left)/r.width));
-    if(dur) w.seekTo(f*dur);
+    w.seekTo(f*dur);
   });
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>{
+      if(es.some(e=>e.isIntersecting)){io.disconnect();boot()}
+    },{rootMargin:'0px 0px 120px 0px'});
+    io.observe(document.getElementById('listen'));
+  }else boot();
 })();
 
-/* ticker */
-(function(){
-  const items = ['Acid Techno','138–150 BPM','Valencia','CDJ / USB','303-led','Budapest roots','Peak time'];
-  const half = items.map(t=>`<span>${t}</span>`).join('');
+/* ticker (re-rendered on language switch) */
+function renderTicker(){
+  const half = STR[LANG].ticker.map(t=>`<span>${t}</span>`).join('');
   document.getElementById('tick').innerHTML = half + half;
-})();
+}
 
 /* ---- dates: edit GIGS to add shows; upcoming:true gets the highlighted treatment ---- */
 const GIGS=[
@@ -497,23 +568,127 @@ const GIGS=[
   {date:'2025 / 07', name:'Aether — Opener', loc:'Budapest, HU'},
   {date:'2025 / 05', name:'Budapest Underground', loc:'Budapest, HU'}
 ];
-(function(){
+let _gigsRendered=false;
+function renderGigs(){
   const wrap=document.getElementById('gigs');
+  const rv=_gigsRendered?'reveal in':'reveal';
+  const rvl=_gigsRendered?'reveal reveal-left in':'reveal reveal-left';
   const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
-  const row=(g,i,extra)=>`<${g.url?`a href="${g.url}" target="_blank" rel="noopener"`:(extra.includes('up')?'a href="#booking"':'div')} class="set-row ${extra} reveal reveal-left" style="--d:${i*.1}s"><span class="date">${esc(g.date)}</span><span class="name">${esc(g.name)}</span><span class="loc">${esc(g.loc)}</span></${g.url||extra.includes('up')?'a':'div'}>`;
+  const row=(g,i,extra)=>`<${g.url?`a href="${g.url}" target="_blank" rel="noopener"`:(extra.includes('up')?'a href="#booking"':'div')} class="set-row ${extra} ${rvl}" style="--d:${i*.1}s"><span class="date">${esc(g.date)}</span><span class="name">${esc(g.name)}</span><span class="loc">${esc(g.loc)}</span></${g.url||extra.includes('up')?'a':'div'}>`;
   const up=GIGS.filter(g=>g.upcoming), past=GIGS.filter(g=>!g.upcoming);
   let html='';
   if(up.length){
-    html+='<div class="sub-eyebrow reveal">Upcoming</div>';
+    html+=`<div class="sub-eyebrow ${rv}">${STR[LANG].upcoming}</div>`;
     html+=up.map((g,i)=>row(g,i,'up')).join('');
   }else{
-    html+='<a class="avail reveal" href="#booking"><span class="dot"></span>Available for bookings — Valencia / ES<span class="go">Get in touch →</span></a>';
+    html+=`<a class="avail ${rv}" href="#booking"><span class="dot"></span>${STR[LANG].avail}<span class="go">${STR[LANG].go}</span></a>`;
   }
   if(past.length){
-    html+='<div class="sub-eyebrow reveal">Archive</div>';
+    html+=`<div class="sub-eyebrow ${rv}">${STR[LANG].archive}</div>`;
     html+=past.map((g,i)=>row(g,i,'')).join('');
   }
   wrap.innerHTML=html;
+  _gigsRendered=true;
+}
+
+/* ---- EN / ES ---- */
+const STR={
+  en:{
+    upcoming:'Upcoming',archive:'Archive',avail:'Available for bookings — Valencia / ES',go:'Get in touch →',
+    sent:'Request sent — I\'ll get back to you soon.',sending:'Sending…',mailApp:'Opening your email app…',
+    error:'Could not send — email me directly below.',
+    ticker:['Acid Techno','138–150 BPM','Valencia','CDJ / USB','303-led','Budapest roots','Peak time']
+  },
+  es:{
+    upcoming:'Próximas',archive:'Archivo',avail:'Disponible para contrataciones — Valencia / ES',go:'Escríbeme →',
+    sent:'Solicitud enviada — te responderé pronto.',sending:'Enviando…',mailApp:'Abriendo tu aplicación de correo…',
+    error:'No se pudo enviar — escríbeme directamente abajo.',
+    ticker:['Acid Techno','138–150 BPM','Valencia','CDJ / USB','303-led','Raíces en Budapest','Hora punta']
+  }
+};
+let LANG='en';
+const ES_TEXT=[
+  ['nav .links a[href="#listen"]','Escucha'],
+  ['nav .links a[href="#sets"]','Fechas'],
+  ['.scroll-cue','Desliza'],
+  ['.hero-meta div:nth-child(1) .k','Base'],
+  ['.hero-meta div:nth-child(1) .v','Valencia, España'],
+  ['.hero-meta div:nth-child(2) .k','Rango'],
+  ['.hero-meta div:nth-child(4) .k','Activo desde'],
+  ['#listen .eyebrow','01 — Escucha'],
+  ['#listen h2','Sesiones'],
+  ['.sc-sub','En streaming vía <a href="https://soundcloud.com/dj_maros/mix01" target="_blank" rel="noopener">SoundCloud</a>'],
+  ['.player-note','Sesiones completas en <a href="https://soundcloud.com/dj_maros" target="_blank" rel="noopener">SoundCloud / DJ_MAROS</a>'],
+  ['#machine .eyebrow','02 — Dale al play'],
+  ['.machine-note','Una línea de <b>303</b> de bolsillo al tempo que pincha Maros. Activa pasos — los punteados son <b>acentos</b> — y juega con el cutoff. Esta es la versión educada. La del club suena más fuerte.'],
+  ['#sets .eyebrow','03 — Fechas'],
+  ['#sets h2','Fechas Seleccionadas'],
+  ['#bio .eyebrow','04 — Bio'],
+  ['#bio h2','Sobre Mí'],
+  ['.bio-grid p:nth-of-type(1)','DJ Maros es un <b>DJ afincado en Valencia especializado en acid techno</b>. Antes activo en Budapest, ha pinchado en clubes y eventos privados, desarrollando un estilo de mezcla preciso y rápido.'],
+  ['.bio-grid p:nth-of-type(2)','Sus sets se construyen sobre <b>ritmos contundentes y estructuras lideradas por el 303</b> — implacables, hipnóticos y diseñados tanto para pistas en hora punta como para naves industriales.'],
+  ['.spec div:nth-child(1) .k','Género'],
+  ['.spec div:nth-child(3) .k','Formato'],
+  ['.spec div:nth-child(5) .k','Raíces'],
+  ['#booking h2','Reserva un Set'],
+  ['.bf-l-name','Nombre'],
+  ['.bf-l-date','Fecha'],
+  ['.bf-l-venue','Sala / Ciudad'],
+  ['.bf-l-msg','Mensaje'],
+  ['.bf-send','Enviar solicitud'],
+  ['.bf-alt .t','O escribe directamente:'],
+  ['.presskit','Fotos de prensa y rider técnico disponibles bajo petición']
+];
+const _origText=new Map();
+function setLang(l){
+  LANG=l;
+  document.documentElement.lang=l;
+  try{localStorage.setItem('maros-lang',l)}catch(_){}
+  document.getElementById('langBtn').textContent = l==='en' ? 'ES' : 'EN';
+  ES_TEXT.forEach(([sel,es])=>{
+    const el=document.querySelector(sel); if(!el) return;
+    if(!_origText.has(sel)) _origText.set(sel,el.innerHTML);
+    el.innerHTML = l==='es' ? es : _origText.get(sel);
+  });
+  const resLbl=document.querySelector('.machine-top .ctrl:nth-of-type(3) label');
+  if(resLbl) resLbl.firstChild.nodeValue = l==='es' ? 'Resonancia ' : 'Resonance ';
+  renderTicker();
+  renderGigs();
+}
+document.getElementById('langBtn').addEventListener('click',()=>setLang(LANG==='en'?'es':'en'));
+let _startLang='en';
+try{_startLang=localStorage.getItem('maros-lang')||((navigator.language||'').toLowerCase().startsWith('es')?'es':'en')}catch(_){}
+setLang(_startLang);
+
+/* ---- booking form: posts to Formspree once FORM_ENDPOINT is set; until then it opens the visitor's email app pre-filled ---- */
+const FORM_ENDPOINT=''; // create a free form at formspree.io and paste its endpoint here, e.g. 'https://formspree.io/f/xyzabcde'
+(function(){
+  const addr=['gergely','maros.hu'].join('@');
+  const link=document.getElementById('mailLink');
+  link.textContent=addr; link.href='mailto:'+addr;
+  link.addEventListener('click',()=>track('booking-email'));
+  const form=document.getElementById('bookForm'), status=document.getElementById('bfStatus');
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const d=Object.fromEntries(new FormData(form));
+    track('booking-request');
+    if(!FORM_ENDPOINT){
+      const subj=encodeURIComponent('Booking request'+(d.venue?' — '+d.venue:''));
+      const body=encodeURIComponent('Name: '+d.name+'\nEmail: '+d.email+'\nDate: '+(d.date||'-')+'\nVenue: '+(d.venue||'-')+'\n\n'+d.message);
+      status.textContent=STR[LANG].mailApp;
+      location.href='mailto:'+addr+'?subject='+subj+'&body='+body;
+      return;
+    }
+    status.textContent=STR[LANG].sending;
+    try{
+      const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
+      if(!r.ok) throw 0;
+      form.reset();
+      status.textContent=STR[LANG].sent;
+    }catch(_){
+      status.textContent=STR[LANG].error;
+    }
+  });
 })();
 
 /* nav brand = small copy of the hero logo */
@@ -680,6 +855,7 @@ $('play').addEventListener('click',async()=>{
   const btn=$('play');
   if(playing){
     btn.classList.add('on'); btn.textContent='■';
+    if(!window.__acidTracked){window.__acidTracked=1;track('acid-machine-play')}
     step=0; nextT=ctx.currentTime+0.06;
     timer=setInterval(schedule,25);
   }else{
