@@ -12,6 +12,9 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://marosg07.github.io/">
 <link rel="canonical" href="https://marosg07.github.io/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MusicGroup","name":"DJ Maros","alternateName":"Maros","genre":"Acid Techno","url":"https://marosg07.github.io/","image":"https://i1.sndcdn.com/artworks-rNjgsERQ1uAI9cHi-fuqKLw-t500x500.jpg","location":{"@type":"Place","name":"Valencia","address":{"@type":"PostalAddress","addressLocality":"Valencia","addressCountry":"ES"}},"sameAs":["https://soundcloud.com/dj_maros","https://instagram.com/mg.flac"]}
+</script>
 <meta property="og:image" content="https://i1.sndcdn.com/artworks-rNjgsERQ1uAI9cHi-fuqKLw-t500x500.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DJ MAROS — Acid Techno DJ · Valencia">
@@ -359,6 +362,46 @@ footer span{font-family:var(--mono);font-size:11px;color:var(--grey);letter-spac
   .machine.reveal.in .step{animation:stepIn .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.12s + var(--i,0)*.024s)}
   @keyframes stepIn{from{opacity:0;transform:translateY(10px) scale(.85)}to{opacity:1;transform:none}}
 }
+
+/* ---------- motion polish v2: waveform, scanline, staggers, glitch ---------- */
+.sc-bar{height:30px}
+#scWave{width:100%;height:100%;display:block;pointer-events:none}
+#scanline{position:fixed;left:0;right:0;top:0;height:14vh;z-index:1;pointer-events:none;transform:translateY(-14vh);
+  background:linear-gradient(180deg,transparent,rgba(70,242,168,.05),transparent)}
+.avail{position:relative;overflow:hidden}
+@media(prefers-reduced-motion:no-preference){
+  #scanline{animation:scan 13s linear infinite}
+  @keyframes scan{from{transform:translateY(-14vh)}to{transform:translateY(100vh)}}
+  #pulseGlow.mixbeat{animation:beatSoft .5s ease-out}
+  @keyframes beatSoft{0%{opacity:.4}100%{opacity:0}}
+  .eyebrow.reveal::after{transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.7,.2,1) .3s}
+  .eyebrow.reveal.in::after{transform:scaleX(1)}
+  .book-form.reveal:not(.in) label,.book-form.reveal:not(.in) .bf-send{opacity:0}
+  .book-form.reveal.in label,.book-form.reveal.in .bf-send{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .book-form.reveal.in .bf-grid label:nth-child(2){animation-delay:.07s}
+  .book-form.reveal.in .bf-grid label:nth-child(3){animation-delay:.14s}
+  .book-form.reveal.in .bf-grid label:nth-child(4){animation-delay:.21s}
+  .book-form.reveal.in .bf-msg{animation-delay:.28s}
+  .book-form.reveal.in .bf-send{animation-delay:.36s}
+  .spec.reveal:not(.in) div{opacity:0}
+  .spec.reveal.in div{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+  .spec.reveal.in div:nth-child(2){animation-delay:.08s}
+  .spec.reveal.in div:nth-child(3){animation-delay:.16s}
+  .spec.reveal.in div:nth-child(4){animation-delay:.24s}
+  .spec.reveal.in div:nth-child(5){animation-delay:.32s}
+  .mt-play:active,.sc-play:active,.tgl:active,.lang:active,.bf-send:active,.mix-row:active{transform:scale(.96)}
+  .step:active{transform:scale(.92)}
+  .avail::before{content:'';position:absolute;top:0;bottom:0;left:-34%;width:34%;transform:translateX(0) skewX(-16deg);pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(70,242,168,.13),transparent);animation:sheen 4.6s ease-in-out infinite}
+  @keyframes sheen{0%,55%{transform:translateX(0) skewX(-16deg)}95%,100%{transform:translateX(520%) skewX(-16deg)}}
+  #heroLogo.glitch{animation:glitchClip .3s steps(3,end)}
+  @keyframes glitchClip{
+    0%{clip-path:inset(0 0 58% 0);translate:-6px 0}
+    33%{clip-path:inset(42% 0 18% 0);translate:5px 0}
+    66%{clip-path:inset(74% 0 0 0);translate:-4px 0}
+    100%{clip-path:inset(0 0 0 0);translate:0 0}
+  }
+}
 </style>
 </head>
 <body>
@@ -554,9 +597,12 @@ function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.co
       w=SC.Widget(frame);
       w.bind(SC.Widget.Events.READY,refresh);
       w.bind(SC.Widget.Events.PLAY,()=>{btn.classList.add('on');btn.textContent='❚❚';panel.classList.add('playing');
+        if(window.__mixBeatStart)__mixBeatStart();
         if(!played){played=true;track('mix-play')}});
-      w.bind(SC.Widget.Events.PAUSE,()=>{btn.classList.remove('on');btn.textContent='▶';panel.classList.remove('playing')});
-      w.bind(SC.Widget.Events.FINISH,()=>{fill.style.width='0%';setTime(0)});
+      w.bind(SC.Widget.Events.PAUSE,()=>{btn.classList.remove('on');btn.textContent='▶';panel.classList.remove('playing');
+        if(window.__mixBeatStop)__mixBeatStop()});
+      w.bind(SC.Widget.Events.FINISH,()=>{fill.style.width='0%';setTime(0);
+        if(window.__mixBeatStop)__mixBeatStop()});
       w.bind(SC.Widget.Events.PLAY_PROGRESS,e=>{
         if(dur){fill.style.width=(e.currentPosition/dur*100)+'%';setTime(e.currentPosition)}
       });
@@ -701,7 +747,7 @@ try{_startLang=localStorage.getItem('maros-lang')||((navigator.language||'').toL
 setLang(_startLang);
 
 /* ---- booking form: posts to Formspree once FORM_ENDPOINT is set; until then it opens the visitor's email app pre-filled ---- */
-const FORM_ENDPOINT=''; // create a free form at formspree.io and paste its endpoint here, e.g. 'https://formspree.io/f/xyzabcde'
+const FORM_ENDPOINT='https://formsubmit.co/ajax/'+['gergely','maros.hu'].join('@'); // formsubmit.co — first real submission emails an activation link; click it once and the form is live
 (function(){
   const addr=['gergely','maros.hu'].join('@');
   const link=document.getElementById('mailLink');
@@ -721,7 +767,10 @@ const FORM_ENDPOINT=''; // create a free form at formspree.io and paste its endp
     }
     status.textContent=STR[LANG].sending;
     try{
-      const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)});
+      const fd=new FormData(form);
+      fd.append('_subject','Booking request'+(d.venue?' — '+d.venue:''));
+      fd.append('_template','table');
+      const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd});
       if(!r.ok) throw 0;
       form.reset();
       status.textContent=STR[LANG].sent;
@@ -956,7 +1005,7 @@ $('play').addEventListener('click',async()=>{
     addEventListener('pointermove', e=>{ mxT = (e.clientX/innerWidth-.5)*2; }, {passive:true});
     new IntersectionObserver(es=>{ vis = es[0].isIntersecting; wake(); }).observe(band);
     document.addEventListener('visibilitychange', ()=>{ tabVis = !document.hidden; wake(); });
-    window.__bgKick = ()=>{ energy = Math.min(1.5, energy+1); };
+    window.__bgKick = (k)=>{ energy = Math.min(1.5, energy+(k||1)); };
   }
 
   /* hero tagline decode scramble */
@@ -1034,6 +1083,86 @@ $('play').addEventListener('click',async()=>{
         a.addEventListener('pointerleave', ()=>{ a.style.transform = ''; });
       });
     }
+  }
+})();
+
+/* ---- motion polish v2: waveform player, page scan, logo glitch, mix beat ---- */
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* full-page drifting scanline */
+  if(!reduce){
+    const s = document.createElement('div');
+    s.id = 'scanline'; s.setAttribute('aria-hidden','true');
+    document.body.appendChild(s);
+  }
+
+  /* occasional hero logo glitch */
+  if(!reduce){
+    const logo = document.getElementById('heroLogo');
+    setInterval(()=>{
+      if(document.hidden || Math.random() < .35) return;
+      const r = logo.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > innerHeight) return;
+      logo.classList.add('glitch');
+      setTimeout(()=>logo.classList.remove('glitch'), 320);
+    }, 5200);
+  }
+
+  /* mix playback pulse — soft room glow + particle surge every 2nd beat at ~142 BPM */
+  let beatTimer = null;
+  const glow = document.getElementById('pulseGlow');
+  window.__mixBeatStart = function(){
+    if(reduce || beatTimer) return;
+    beatTimer = setInterval(()=>{
+      if(document.hidden) return;
+      glow.classList.remove('mixbeat'); void glow.offsetWidth; glow.classList.add('mixbeat');
+      if(window.__bgKick) __bgKick(.5);
+    }, Math.round(60000/142*2));
+  };
+  window.__mixBeatStop = function(){ clearInterval(beatTimer); beatTimer = null; };
+
+  /* pseudo-waveform progress bar for the mix player */
+  const bar = document.getElementById('scBar');
+  if(bar){
+    const track = bar.querySelector('.track'), fill = document.getElementById('scFill');
+    const panel = document.getElementById('scPlayer'), title = document.getElementById('scTitle');
+    const cv = document.createElement('canvas');
+    cv.id = 'scWave'; cv.setAttribute('aria-hidden','true');
+    bar.appendChild(cv); track.style.display = 'none';
+    const g = cv.getContext('2d');
+    const DPR = Math.min(2, devicePixelRatio || 1);
+    let bars = [], W = 0, H = 0, prog = 0, t = 0;
+    function seeded(str){
+      let h = 2166136261;
+      for(const c of str){ h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); }
+      return ()=>{ h = Math.imul(h ^ h>>>15, 2246822519); return (h>>>0)/4294967296; };
+    }
+    function gen(){
+      const r = seeded(title.textContent || 'mix');
+      bars = []; let v = .5;
+      for(let i=0;i<96;i++){
+        v += (r()-.5)*.34; v = Math.max(.12, Math.min(1, v*.96+.02));
+        bars.push(v*(.55+.45*Math.sin((i+4)/104*Math.PI)));
+      }
+    }
+    function size(){ W = bar.clientWidth; H = bar.clientHeight; cv.width = W*DPR; cv.height = H*DPR; g.setTransform(DPR,0,0,DPR,0,0); }
+    function draw(){
+      g.clearRect(0,0,W,H);
+      const n = bars.length, bw = W/n, playing = panel.classList.contains('playing');
+      for(let i=0;i<n;i++){
+        let h = bars[i];
+        if(playing && !reduce && Math.abs(i/n-prog) < .03) h = Math.min(1, h*1.3+.09*Math.sin(t*.3+i*2));
+        const bh = Math.max(2, h*(H-4));
+        g.fillStyle = (i/n <= prog) ? 'rgba(70,242,168,.95)' : 'rgba(143,162,154,.30)';
+        g.fillRect(i*bw+bw*.18, (H-bh)/2, bw*.64, bh);
+      }
+    }
+    gen(); size(); draw();
+    addEventListener('resize', ()=>{ size(); draw(); }, {passive:true});
+    new MutationObserver(()=>{ prog = (parseFloat(fill.style.width)||0)/100; draw(); }).observe(fill, {attributes:true, attributeFilter:['style']});
+    new MutationObserver(()=>{ gen(); draw(); }).observe(title, {childList:true, characterData:true, subtree:true});
+    if(!reduce)(function loop(){ t++; if(panel.classList.contains('playing')) draw(); requestAnimationFrame(loop); })();
   }
 })();
 </script>
