@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DJ MAROS — Schranz &amp; Acid Techno DJ · Valencia</title>
-<meta name="description" content="DJ Maros — Valencia-based DJ playing schranz and acid techno. 138–170 BPM. Mixes, dates and bookings.">
+<meta name="description" content="DJ Maros — Valencia-based DJ playing schranz and acid techno. 150–170 BPM. Mixes, dates and bookings.">
 <script data-goatcounter="https://djmaros.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <meta name="theme-color" content="#ffffff">
 <meta property="og:title" content="DJ MAROS — Schranz &amp; Acid Techno DJ · Valencia">
-<meta property="og:description" content="Valencia-based schranz and acid techno. 138–170 BPM. Listen to mixes and book a set.">
+<meta property="og:description" content="Valencia-based schranz and acid techno. 150–170 BPM. Listen to mixes and book a set.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://marosg07.github.io/">
 <link rel="canonical" href="https://marosg07.github.io/">
@@ -20,7 +20,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DJ MAROS — Schranz &amp; Acid Techno DJ · Valencia">
-<meta name="twitter:description" content="Valencia-based schranz and acid techno. 138–170 BPM. Listen to mixes and book a set.">
+<meta name="twitter:description" content="Valencia-based schranz and acid techno. 150–170 BPM. Listen to mixes and book a set.">
 <meta name="twitter:image" content="https://marosg07.github.io/assets/og.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23ffffff'/%3E%3Crect x='1' y='1' width='62' height='62' rx='12' fill='none' stroke='%230c0c0b' stroke-width='2'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial,sans-serif' font-size='34' font-weight='900' fill='%230c0c0b' text-anchor='middle'%3EM%3C/text%3E%3Crect x='18' y='50' width='28' height='4' fill='%23ff3c00'/%3E%3C/svg%3E">
 <link rel="preload" as="image" href="assets/logo.webp">
@@ -37,13 +37,11 @@
   --line:#e3e3dd;
   --accent:#ff3c00;
   --accent-ink:#d63200;   /* accent dark enough for small text on white */
-  /* the machine is a piece of hardware: its own dark palette */
-  --device:#121211;
-  --device-2:#1d1d1b;
-  --device-line:#30302c;
-  --device-text:#f1f1ec;
-  --device-muted:#8e8e86;
-  --acid:#46f2a8;
+  /* the inverted booking band */
+  --dark-2:#1d1d1b;
+  --dark-line:#30302c;
+  --dark-text:#f1f1ec;
+  --dark-muted:#8e8e86;
   --display:'Anton','Arial Narrow',sans-serif;
   --body:'Archivo',system-ui,sans-serif;
   --mono:'Space Mono',ui-monospace,monospace;
@@ -164,61 +162,6 @@ h2::after{content:'.';color:var(--accent)}
 .mix-row .tag:empty{display:none}
 .mix-row.active::after{content:'';width:8px;height:8px;background:var(--accent);flex-shrink:0}
 
-/* ---------- hard groove machine ---------- */
-.machine{background:var(--device);color:var(--device-text);border-radius:6px;padding:32px;position:relative;
-  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 32px 64px -32px rgba(0,0,0,.45),0 0 0 1px #000}
-.machine-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--device-line)}
-.m-model{font-family:var(--display);font-size:var(--fs-2xl);letter-spacing:.02em;line-height:1}
-.m-model i{font-style:normal;color:var(--accent)}
-.m-name{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.22em;color:var(--device-muted);text-transform:uppercase}
-.presets{margin-left:auto;display:flex;border:1px solid var(--device-line);border-radius:3px;align-self:center}
-.pre{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;padding:8px 16px;background:transparent;border:0;color:var(--device-muted);cursor:pointer;transition:background .15s,color .15s}
-.pre + .pre{border-left:1px solid var(--device-line)}
-.pre:hover{color:var(--device-text)}
-.pre.on{background:var(--device-text);color:var(--device)}
-.machine-top{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;margin-bottom:32px}
-.mt-play{width:64px;height:64px;border-radius:3px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:var(--fs-lg);cursor:pointer;transition:background .15s,color .15s,box-shadow .15s;flex-shrink:0}
-.mt-play:hover{background:var(--accent);color:var(--device)}
-.mt-play.on{background:var(--accent);color:var(--device);box-shadow:0 0 32px rgba(255,60,0,.45)}
-.ctrl{display:flex;flex-direction:column;gap:8px;min-width:136px;flex:1;max-width:232px}
-.ctrl label{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.18em;color:var(--device-muted);text-transform:uppercase;display:flex;justify-content:space-between;gap:8px}
-.ctrl label output{color:var(--device-text)}
-input[type=range]{-webkit-appearance:none;appearance:none;height:4px;background:var(--device-line);border-radius:2px;cursor:pointer;width:100%}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:2px;background:var(--device-text);border:0;box-shadow:0 0 0 4px var(--device)}
-input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:2px;background:var(--device-text);border:0}
-input[type=range]:hover::-webkit-slider-thumb{background:var(--accent)}
-#filt{background:linear-gradient(90deg,var(--device-line) 0 49%,var(--device-muted) 49% 51%,var(--device-line) 51%)}
-.lanes{display:grid;gap:8px}
-.lane{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:center}
-.lane-name{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;background:transparent;border:1px solid var(--device-line);border-radius:3px;color:var(--device-text);padding:8px 0;cursor:pointer;transition:color .15s,border-color .15s,opacity .15s}
-.lane-name:hover{border-color:var(--device-muted)}
-.lane.muted .lane-name{color:var(--device-muted);text-decoration:line-through}
-.lane.muted .steps{opacity:.3}
-.steps{display:grid;grid-template-columns:repeat(16,1fr);gap:4px;transition:opacity .2s}
-.step{height:40px;border:1px solid var(--device-line);background:var(--device-2);border-radius:2px;cursor:pointer;position:relative;padding:0;transition:background .08s,border-color .08s}
-.step:nth-child(4n+1){border-color:#45453f}
-.step:hover{border-color:var(--device-muted)}
-.step.on{background:var(--accent);border-color:var(--accent)}
-.lane-acid .step.on{background:var(--acid);border-color:var(--acid)}
-.step.play{background:#34342f}
-.step.play.on{background:var(--device-text);border-color:var(--device-text)}
-.step.acc::before{content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--device-muted)}
-.step.acc.on::before{background:var(--device)}
-.machine-note{font-family:var(--mono);font-size:var(--fs-xs);line-height:1.7;color:var(--device-muted);margin-top:24px;letter-spacing:.04em;max-width:760px}
-.machine-note b{color:var(--device-text);font-weight:400}
-.machine.thump{animation:mthump .3s ease-out}
-@keyframes mthump{
-  0%{box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 40px 80px -32px rgba(0,0,0,.5),0 0 0 1px #000,0 0 64px rgba(255,60,0,.32)}
-  100%{box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 40px 80px -32px rgba(0,0,0,.5),0 0 0 1px #000,0 0 0 rgba(255,60,0,0)}
-}
-
-/* ---------- kick pulse ---------- */
-#pulseGlow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;
-  background:radial-gradient(ellipse at 50% 120%,rgba(255,60,0,.16),transparent 60%)}
-#pulseGlow.onbeat{animation:beat .38s ease-out}
-@keyframes beat{0%{opacity:1}100%{opacity:0}}
-@media(prefers-reduced-motion:reduce){#pulseGlow.onbeat,.machine.thump{animation:none}}
-
 /* ---------- photo band ---------- */
 .photo-band{display:grid;grid-template-columns:7fr 5fr;gap:8px;height:clamp(320px,46vw,680px);margin-top:128px;position:relative;z-index:2}
 .pb-item{overflow:hidden}
@@ -273,22 +216,22 @@ a.set-row:hover::after{opacity:1;transform:none;color:var(--accent)}
 .booking-in{max-width:1152px;margin:0 auto}
 .booking .eyebrow{color:var(--paper)}
 .booking .eyebrow .no{color:var(--accent)}
-.booking .eyebrow::after{background:var(--device-line)}
+.booking .eyebrow::after{background:var(--dark-line)}
 .booking h2{color:var(--paper)}
 .booking-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:start}
-.bk-lead{font-size:var(--fs-xl);line-height:1.45;color:var(--device-text);letter-spacing:-.01em;max-width:420px}
-.bf-alt{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-muted);letter-spacing:.16em;margin:32px 0 8px;text-transform:uppercase}
+.bk-lead{font-size:var(--fs-xl);line-height:1.45;color:var(--dark-text);letter-spacing:-.01em;max-width:420px}
+.bf-alt{font-family:var(--mono);font-size:var(--fs-xs);color:var(--dark-muted);letter-spacing:.16em;margin:32px 0 8px;text-transform:uppercase}
 .mail{font-family:var(--mono);font-size:var(--fs-lg);color:var(--paper);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:6px;word-break:break-all;transition:color .15s}
 .mail:hover{color:var(--accent)}
 .socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
-.socials a{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.16em;color:var(--paper);border:1px solid var(--device-line);padding:16px 24px;border-radius:2px;text-decoration:none;text-transform:uppercase;transition:border-color .15s,background .15s,color .15s}
+.socials a{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.16em;color:var(--paper);border:1px solid var(--dark-line);padding:16px 24px;border-radius:2px;text-decoration:none;text-transform:uppercase;transition:border-color .15s,background .15s,color .15s}
 .socials a:hover{border-color:var(--paper);background:var(--paper);color:var(--ink)}
-.presskit{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-muted);letter-spacing:.16em;margin-top:32px;text-transform:uppercase}
+.presskit{font-family:var(--mono);font-size:var(--fs-xs);color:var(--dark-muted);letter-spacing:.16em;margin-top:32px;text-transform:uppercase}
 .book-form{text-align:left}
 .bf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .book-form label{display:flex;flex-direction:column;gap:8px}
-.book-form label span{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.2em;color:var(--device-muted);text-transform:uppercase}
-.book-form input,.book-form textarea{background:var(--device-2);border:1px solid var(--device-line);border-radius:2px;padding:16px;color:var(--paper);font-family:var(--body);font-size:var(--fs-md);transition:border-color .15s;width:100%}
+.book-form label span{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.2em;color:var(--dark-muted);text-transform:uppercase}
+.book-form input,.book-form textarea{background:var(--dark-2);border:1px solid var(--dark-line);border-radius:2px;padding:16px;color:var(--paper);font-family:var(--body);font-size:var(--fs-md);transition:border-color .15s;width:100%}
 .book-form input::placeholder,.book-form textarea::placeholder{color:#6f6f68}
 .book-form input:focus,.book-form textarea:focus{outline:none;border-color:var(--accent)}
 .bf-msg{margin-top:16px}
@@ -297,8 +240,8 @@ a.set-row:hover::after{opacity:1;transform:none;color:var(--accent)}
 .bf-send:hover{background:var(--paper)}
 .bf-status{font-family:var(--mono);font-size:var(--fs-xs);color:var(--accent);letter-spacing:.12em;margin-top:16px;min-height:16px}
 
-footer{background:var(--ink);border-top:1px solid var(--device-line);padding:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-muted);letter-spacing:.16em}
+footer{background:var(--ink);border-top:1px solid var(--dark-line);padding:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--dark-muted);letter-spacing:.16em}
 
 /* ---------- entrances ---------- */
 @media(prefers-reduced-motion:no-preference){
@@ -324,9 +267,6 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
   h2.reveal.in{opacity:1;transform:none;letter-spacing:-.005em}
   .eyebrow.reveal::after{transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease) .3s}
   .eyebrow.reveal.in::after{transform:scaleX(1)}
-  .machine.reveal:not(.in) .step{opacity:0}
-  .machine.reveal.in .step{animation:stepIn .45s var(--ease) both;animation-delay:calc(.1s + var(--i,0)*.022s + var(--l,0)*.05s)}
-  @keyframes stepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .book-form.reveal:not(.in) label,.book-form.reveal:not(.in) .bf-send{opacity:0}
   .book-form.reveal.in label,.book-form.reveal.in .bf-send{animation:rise .6s var(--ease) both}
   .book-form.reveal.in .bf-grid label:nth-child(2){animation-delay:.07s}
@@ -340,8 +280,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
   .spec.reveal.in div:nth-child(3){animation-delay:.16s}
   .spec.reveal.in div:nth-child(4){animation-delay:.24s}
   .spec.reveal.in div:nth-child(5){animation-delay:.32s}
-  .mt-play:active,.sc-play:active,.pre:active,.lane-name:active,.lang:active,.bf-send:active,.mix-row:active{transform:scale(.96)}
-  .step:active{transform:scale(.9)}
+  .sc-play:active,.lang:active,.bf-send:active,.mix-row:active{transform:scale(.96)}
 }
 
 /* ---------- responsive ---------- */
@@ -370,16 +309,6 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
   .player{flex-direction:column;align-items:stretch;padding:16px}
   .sc-art{width:100%;height:184px}
   .sc-time{display:none}
-  .machine{padding:24px 16px}
-  .machine-top{gap:16px}
-  .ctrl{min-width:calc(50% - 8px);max-width:none}
-  .mt-play{width:56px;height:56px}
-  .presets{margin-left:0;width:100%}
-  .pre{flex:1}
-  .lane{grid-template-columns:1fr;gap:8px}
-  .lane-name{justify-self:start;padding:4px 16px}
-  .steps{grid-template-columns:repeat(8,1fr)}
-  .step{height:32px}
   .set-row{grid-template-columns:1fr;gap:8px;padding:24px 0}
   a.set-row::after{display:none}
   .bf-grid{grid-template-columns:1fr}
@@ -396,13 +325,11 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
 <body>
 
 <div id="progress" aria-hidden="true"></div>
-<div id="pulseGlow" aria-hidden="true"></div>
 
 <nav>
   <a class="brand" href="#top" id="brand" aria-label="DJ Maros — back to top"></a>
   <div class="links">
     <a href="#listen">Listen</a>
-    <a href="#machine">Machine</a>
     <a href="#sets">Sets</a>
     <a href="#bio">Bio</a>
     <a href="#booking">Booking</a>
@@ -423,7 +350,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
     <div class="hero-sub"><b>Schranz</b> / Acid Techno — Valencia</div>
     <div class="hero-meta">
       <div><div class="k">Based in</div><div class="v">Valencia, Spain</div></div>
-      <div><div class="k">Range</div><div class="v">138–170 BPM</div></div>
+      <div><div class="k">Range</div><div class="v">150–170 BPM</div></div>
       <div><div class="k">Format</div><div class="v">CDJ / USB</div></div>
       <div><div class="k">Active since</div><div class="v">2022</div></div>
     </div>
@@ -455,55 +382,19 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
   </div>
 </section>
 
-<section id="machine">
-  <div class="eyebrow reveal"><span class="no">02</span>Play it</div>
-  <h2 class="reveal" style="--d:.08s">The Machine</h2>
-  <div class="machine reveal" style="--d:.16s">
-    <div class="machine-head">
-      <span class="m-model">MRS<i>-</i>170</span>
-      <span class="m-name">Hard groove machine</span>
-      <div class="presets" role="group" aria-label="Pattern">
-        <button class="pre" type="button" data-p="schranz">Schranz</button>
-        <button class="pre" type="button" data-p="acid">Acid</button>
-      </div>
-    </div>
-    <div class="machine-top">
-      <button class="mt-play" id="play" type="button" aria-label="Play or stop the machine">▶</button>
-      <div class="ctrl">
-        <label for="bpm"><span>Tempo</span> <output id="bpmOut">160 BPM</output></label>
-        <input type="range" id="bpm" min="138" max="170" value="160" step="1">
-      </div>
-      <div class="ctrl">
-        <label for="filt"><span class="lbl-filter">Filter</span> <output id="filtOut">Open</output></label>
-        <input type="range" id="filt" min="0" max="100" value="50">
-      </div>
-      <div class="ctrl">
-        <label for="drv"><span>Drive</span> <output id="drvOut">72%</output></label>
-        <input type="range" id="drv" min="0" max="100" value="72">
-      </div>
-      <div class="ctrl">
-        <label for="rum"><span>Rumble</span> <output id="rumOut">60%</output></label>
-        <input type="range" id="rum" min="0" max="100" value="60">
-      </div>
-    </div>
-    <div class="lanes" id="lanes" role="group" aria-label="16-step drum sequencer"></div>
-    <div class="machine-note">A pocket <b>schranz</b> groove at the tempo Maros plays. Tap steps to rewrite the loop, tap a lane name to mute it, sweep the filter both ways and push the rumble. Flip to <b>Acid</b> for the 303. This is the polite version — the club one is louder.</div>
-  </div>
-</section>
-
 <div class="photo-band" aria-label="Photos">
   <figure class="pb-item reveal"><img src="assets/photo-floor.jpg" width="1200" height="1599" alt="Maros in a balaclava and goggles on a festival dancefloor" loading="lazy" style="object-position:50% 52%"></figure>
   <figure class="pb-item reveal" style="--d:.12s"><img src="assets/photo-profile.jpg" width="1080" height="1439" alt="Maros in profile, balaclava and white sunglasses, motion-blurred lights behind" loading="lazy" style="object-position:30% 50%"></figure>
 </div>
 
 <section id="sets" class="sets">
-  <div class="eyebrow reveal"><span class="no">03</span>Dates</div>
+  <div class="eyebrow reveal"><span class="no">02</span>Dates</div>
   <h2 class="reveal" style="--d:.08s">Selected Dates</h2>
   <div id="gigs"></div>
 </section>
 
 <section id="bio">
-  <div class="eyebrow reveal"><span class="no">04</span>Bio</div>
+  <div class="eyebrow reveal"><span class="no">03</span>Bio</div>
   <h2 class="reveal" style="--d:.08s">About</h2>
   <div class="bio-grid">
     <figure class="bio-photo reveal" style="--d:.12s"><img src="assets/photo-portrait.jpg" width="1200" height="1600" alt="DJ Maros in a cap, sunglasses and a balaclava, overexposed black-and-white" loading="lazy"></figure>
@@ -514,7 +405,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
     </div>
     <div class="spec reveal" style="--d:.22s">
       <div><span class="k">Genre</span><span class="v">Schranz / Acid Techno</span></div>
-      <div><span class="k">Tempo</span><span class="v">138–170 BPM</span></div>
+      <div><span class="k">Tempo</span><span class="v">150–170 BPM</span></div>
       <div><span class="k">Format</span><span class="v">CDJ / USB</span></div>
       <div><span class="k">Base</span><span class="v">Valencia, ES</span></div>
       <div><span class="k">Roots</span><span class="v">Budapest, HU</span></div>
@@ -525,7 +416,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
 
 <section id="booking" class="booking">
   <div class="booking-in">
-    <div class="eyebrow reveal"><span class="no">05</span>Booking</div>
+    <div class="eyebrow reveal"><span class="no">04</span>Booking</div>
     <h2 class="reveal" style="--d:.08s">Book a set</h2>
     <div class="booking-grid">
       <div class="reveal" style="--d:.12s">
@@ -556,7 +447,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--device-mu
 <footer>
   <span>© 2026 DJ MAROS</span>
   <span>VALENCIA — BUDAPEST</span>
-  <span>138–170 BPM</span>
+  <span>150–170 BPM</span>
 </footer>
 
 <script>
@@ -571,13 +462,14 @@ function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.co
 
   /* mix list — add a line to MIXES when a new mix drops and it appears below the player */
   const MIXES=[
+    {title:'Maros – Acid Techno Mix 01', tag:'Acid mix', url:'https://soundcloud.com/dj_maros/mix01'},
     {title:'Maros – Mix 02', tag:'Mix', url:'https://soundcloud.com/dj_maros/maros-mix-2'},
-    {title:'Credits Song for my Death — Schranz Rework', tag:'Rework', url:'https://soundcloud.com/dj_maros/son6formyd34th'},
-    {title:'Maros – Acid Techno Mix 01', tag:'Acid mix', url:'https://soundcloud.com/dj_maros/mix01'}
-    // newest first — {title:'…', tag:'Mix', url:'https://soundcloud.com/dj_maros/…'},
+    {title:'Credits Song for my Death — Schranz Rework', tag:'Rework', url:'https://soundcloud.com/dj_maros/son6formyd34th'}
+    // {title:'…', tag:'Mix', url:'https://soundcloud.com/dj_maros/…'},
   ];
   const list=document.getElementById('mixList');
-  let w=null, dur=0, current=0, booted=false, played=false;
+  const START=1; // Mix 02 is loaded on arrival — keep the iframe data-src and the placeholder title/art in the markup in sync
+  let w=null, dur=0, current=START, booted=false, played=false;
   const fmt=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
   const setTime=pos=>{timeEl.innerHTML='<b>'+fmt(pos)+'</b> / '+fmt(dur)};
   function refresh(){
@@ -621,7 +513,7 @@ function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.co
   MIXES.forEach((m,i)=>{
     const b=document.createElement('button');
     b.type='button';
-    b.className='mix-row'+(i===0?' active':'');
+    b.className='mix-row'+(i===START?' active':'');
     b.innerHTML='<span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t"></span><span class="tag"></span>';
     b.querySelector('.t').textContent=m.title||('Mix '+(i+1));
     b.querySelector('.tag').textContent=m.tag||'';
@@ -691,20 +583,19 @@ const STR={
   en:{
     upcoming:'Upcoming',archive:'Archive',avail:'Available for bookings — Valencia / ES',go:'Get in touch →',
     sent:'Request sent — I\'ll get back to you soon.',sending:'Sending…',mailApp:'Opening your email app…',
-    error:'Could not send — email me directly.',open:'Open',
-    ticker:['Schranz','Acid Techno','138–170 BPM','Valencia','Hard groove','CDJ / USB','Budapest roots','Peak time']
+    error:'Could not send — email me directly.',
+    ticker:['Schranz','Acid Techno','150–170 BPM','Valencia','Hard groove','CDJ / USB','Budapest roots','Peak time']
   },
   es:{
     upcoming:'Próximas',archive:'Archivo',avail:'Disponible para contrataciones — Valencia / ES',go:'Escríbeme →',
     sent:'Solicitud enviada — te responderé pronto.',sending:'Enviando…',mailApp:'Abriendo tu aplicación de correo…',
-    error:'No se pudo enviar — escríbeme directamente.',open:'Abierto',
-    ticker:['Schranz','Acid Techno','138–170 BPM','Valencia','Hard groove','CDJ / USB','Raíces en Budapest','Hora punta']
+    error:'No se pudo enviar — escríbeme directamente.',
+    ticker:['Schranz','Acid Techno','150–170 BPM','Valencia','Hard groove','CDJ / USB','Raíces en Budapest','Hora punta']
   }
 };
 let LANG='en';
 const ES_TEXT=[
   ['nav .links a[href="#listen"]','Escucha'],
-  ['nav .links a[href="#machine"]','Máquina'],
   ['nav .links a[href="#sets"]','Fechas'],
   ['.hero-meta div:nth-child(1) .k','Base'],
   ['.hero-meta div:nth-child(1) .v','Valencia, España'],
@@ -713,11 +604,7 @@ const ES_TEXT=[
   ['#listen .eyebrow','<span class="no">01</span>Escucha'],
   ['#listen h2','Sesiones'],
   ['.sc-sub','En streaming vía <a href="https://soundcloud.com/dj_maros/maros-mix-2" target="_blank" rel="noopener">SoundCloud</a>'],
-  ['#machine .eyebrow','<span class="no">02</span>Dale al play'],
-  ['#machine h2','La Máquina'],
-  ['.lbl-filter','Filtro'],
-  ['.machine-note','Un groove de <b>schranz</b> de bolsillo al tempo que pincha Maros. Toca los pasos para reescribir el loop, toca el nombre de una pista para silenciarla, barre el filtro en ambos sentidos y sube el rumble. Cambia a <b>Acid</b> para el 303. Esta es la versión educada — la del club suena más fuerte.'],
-  ['#sets .eyebrow','<span class="no">03</span>Fechas'],
+  ['#sets .eyebrow','<span class="no">02</span>Fechas'],
   ['#sets h2','Fechas Seleccionadas'],
   ['#bio h2','Sobre Mí'],
   ['.bio-grid p:nth-of-type(1)','DJ Maros es un <b>DJ afincado en Valencia que pincha schranz y acid techno</b>. Antes activo en Budapest, ha pinchado en clubes y eventos privados, desarrollando un estilo de mezcla preciso y rápido.'],
@@ -748,7 +635,6 @@ function setLang(l){
   });
   renderTicker();
   renderGigs();
-  if(window.__filterLabel) __filterLabel();
 }
 document.getElementById('langBtn').addEventListener('click',()=>setLang(LANG==='en'?'es':'en'));
 
@@ -832,214 +718,6 @@ const FORM_ENDPOINT='https://formsubmit.co/ajax/'+['gergely','maros.hu'].join('@
   }, {rootMargin:'-35% 0px -55% 0px'});
   document.querySelectorAll('section[id]').forEach(s => so.observe(s));
 })();
-
-/* ---- hard groove machine: schranz drum lanes + an optional 303 ---- */
-const $=id=>document.getElementById(id);
-const LANES=[
-  {id:'kick', name:'Kick'},
-  {id:'perc', name:'Perc'},
-  {id:'clap', name:'Clap'},
-  {id:'hat',  name:'Hat'},
-  {id:'acid', name:'303'}
-];
-const NOTES=[40,40,52,40,43,55,40,46, 40,52,40,43,58,40,46,52]; // MIDI — E acid contour, octave stabs
-const ACC  =[1,0,1,0,0,1,0,0, 1,0,0,1,1,0,0,1];
-const TOM  =[0,165,196,0, 0,147,0,220, 0,165,196,0, 0,175,220,262]; // Hz — rolling tom loop
-const bits=s=>[...s].map(c=>c==='1');
-const PRESETS={
-  schranz:{bpm:160, drv:72, rum:60, mute:['acid'], p:{
-    kick:'1000100010001000', perc:'0110010101100111', clap:'0000100000001000',
-    hat:'0010001000100011',  acid:'1101101010101100'}},
-  acid:{bpm:145, drv:60, rum:18, mute:[], p:{
-    kick:'1000100010001000', perc:'0000000000000000', clap:'0000100000001000',
-    hat:'1111111111111111',  acid:'1101101010101100'}}
-};
-const bpmEl=$('bpm'), filtEl=$('filt'), drvEl=$('drv'), rumEl=$('rum');
-const cells={}, laneOn={}, laneRow={}, cols=Array.from({length:16},()=>[]);
-
-LANES.forEach((L,li)=>{
-  const row=document.createElement('div'); row.className='lane lane-'+L.id;
-  const nb=document.createElement('button');
-  nb.type='button'; nb.className='lane-name'; nb.textContent=L.name;
-  nb.setAttribute('aria-label',L.name+' lane on/off');
-  nb.addEventListener('click',()=>setLane(L.id,!laneOn[L.id]));
-  const st=document.createElement('div'); st.className='steps';
-  cells[L.id]=[];
-  for(let i=0;i<16;i++){
-    const c=document.createElement('button');
-    c.type='button';
-    c.className='step'+(L.id==='acid'&&ACC[i]?' acc':'');
-    c.style.setProperty('--i',i); c.style.setProperty('--l',li);
-    c.setAttribute('aria-label',L.name+' step '+(i+1));
-    c.addEventListener('click',()=>c.setAttribute('aria-pressed',c.classList.toggle('on')));
-    st.appendChild(c); cells[L.id].push(c); cols[i].push(c);
-  }
-  row.append(nb,st); $('lanes').appendChild(row);
-  laneRow[L.id]=row;
-});
-function setLane(id,on){
-  laneOn[id]=on;
-  laneRow[id].classList.toggle('muted',!on);
-  laneRow[id].querySelector('.lane-name').setAttribute('aria-pressed',on);
-}
-function loadPreset(k){
-  const P=PRESETS[k];
-  bpmEl.value=P.bpm; drvEl.value=P.drv; rumEl.value=P.rum;
-  LANES.forEach(L=>{
-    setLane(L.id,!P.mute.includes(L.id));
-    bits(P.p[L.id]).forEach((on,i)=>{ cells[L.id][i].classList.toggle('on',on); cells[L.id][i].setAttribute('aria-pressed',on); });
-  });
-  document.querySelectorAll('.pre').forEach(b=>{ const on=b.dataset.p===k; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on); });
-  [bpmEl,drvEl,rumEl].forEach(el=>el.dispatchEvent(new Event('input')));
-}
-document.querySelectorAll('.pre').forEach(b=>b.addEventListener('click',()=>loadPreset(b.dataset.p)));
-
-/* bipolar DJ filter: left of centre = low-pass, right = high-pass */
-function filterVals(v){
-  if(v<47){ const x=(47-v)/47; return {lp:18000*Math.pow(200/18000,x), hp:20, label:'LP '+Math.round(x*100)+'%'}; }
-  if(v>53){ const x=(v-53)/47; return {lp:18000, hp:20*Math.pow(2400/20,x), label:'HP '+Math.round(x*100)+'%'}; }
-  return {lp:18000, hp:20, label:null};
-}
-window.__filterLabel=()=>{ const f=filterVals(+filtEl.value); $('filtOut').textContent=f.label||STR[LANG].open; };
-
-let ctx=null, playing=false, step=0, nextT=0, timer=null, lastCol=null;
-let bus=null, shaper=null, lp=null, hp=null, rumSend=null, rumDuck=null, rumOut=null, noise=null;
-bpmEl.oninput=()=>$('bpmOut').textContent=bpmEl.value+' BPM';
-drvEl.oninput=()=>{$('drvOut').textContent=drvEl.value+'%'; if(shaper)shaper.curve=driveCurve(+drvEl.value)};
-rumEl.oninput=()=>{$('rumOut').textContent=rumEl.value+'%'; setRumble()};
-filtEl.oninput=()=>{__filterLabel(); setFilter()};
-
-/* the room reacts to the kick */
-const thumpReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const machineEl = document.querySelector('.machine'), glowEl = $('pulseGlow');
-function thump(){
-  if(thumpReduce) return;
-  machineEl.classList.remove('thump'); void machineEl.offsetWidth; machineEl.classList.add('thump');
-  glowEl.classList.remove('onbeat'); void glowEl.offsetWidth; glowEl.classList.add('onbeat');
-}
-
-function midiHz(m){return 440*Math.pow(2,(m-69)/12)}
-function driveCurve(amount){
-  const k=1+amount*0.9, n=1024, c=new Float32Array(n);
-  for(let i=0;i<n;i++){const x=i*2/n-1;c[i]=Math.tanh(k*x)/Math.tanh(k)}
-  return c;
-}
-function impulse(sec){
-  const n=Math.round(ctx.sampleRate*sec), buf=ctx.createBuffer(2,n,ctx.sampleRate);
-  for(let ch=0;ch<2;ch++){const d=buf.getChannelData(ch); for(let i=0;i<n;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/n,2.4);}
-  return buf;
-}
-function buildGraph(){
-  bus=ctx.createGain(); bus.gain.value=0.8;
-  shaper=ctx.createWaveShaper(); shaper.curve=driveCurve(+drvEl.value); shaper.oversample='4x';
-  const comp=ctx.createDynamicsCompressor();
-  comp.threshold.value=-14; comp.ratio.value=6; comp.attack.value=0.002; comp.release.value=0.12;
-  lp=ctx.createBiquadFilter(); lp.type='lowpass'; lp.Q.value=1.4;
-  hp=ctx.createBiquadFilter(); hp.type='highpass'; hp.Q.value=1.4;
-  const master=ctx.createGain(); master.gain.value=0.34; // the compressor adds make-up gain; this keeps peaks under 0 dBFS
-  bus.connect(shaper); shaper.connect(comp); comp.connect(lp); lp.connect(hp); hp.connect(master); master.connect(ctx.destination);
-  /* rumble: kick → long verb → low-pass → ducked by the next kick → back into the drive */
-  const conv=ctx.createConvolver(); conv.buffer=impulse(1.4);
-  const rlp=ctx.createBiquadFilter(); rlp.type='lowpass'; rlp.frequency.value=140; rlp.Q.value=1.1;
-  rumSend=ctx.createGain(); rumDuck=ctx.createGain(); rumOut=ctx.createGain(); rumOut.gain.value=0;
-  rumSend.connect(conv); conv.connect(rlp); rlp.connect(rumDuck); rumDuck.connect(rumOut); rumOut.connect(bus);
-  const n=ctx.sampleRate; noise=ctx.createBuffer(1,n,n);
-  const d=noise.getChannelData(0); for(let i=0;i<n;i++) d[i]=Math.random()*2-1;
-  setFilter(); setRumble();
-}
-function setFilter(){ if(!ctx) return; const f=filterVals(+filtEl.value), t=ctx.currentTime; lp.frequency.setTargetAtTime(f.lp,t,.03); hp.frequency.setTargetAtTime(f.hp,t,.03); }
-function setRumble(){ if(rumOut) rumOut.gain.setTargetAtTime((+rumEl.value/100)*3.2,ctx.currentTime,.05); }
-function noiseHit(t,len,type,freq,q,gain){
-  const s=ctx.createBufferSource(), f=ctx.createBiquadFilter(), g=ctx.createGain();
-  s.buffer=noise; f.type=type; f.frequency.value=freq; f.Q.value=q;
-  g.gain.setValueAtTime(gain,t); g.gain.exponentialRampToValueAtTime(0.0001,t+len);
-  s.connect(f); f.connect(g); g.connect(bus);
-  s.start(t,Math.random()*.5); s.stop(t+len+.02);
-  return g;
-}
-
-function kick(t){
-  const o=ctx.createOscillator(), g=ctx.createGain();
-  o.frequency.setValueAtTime(240,t);
-  o.frequency.exponentialRampToValueAtTime(54,t+0.07);
-  o.frequency.exponentialRampToValueAtTime(44,t+0.32);
-  g.gain.setValueAtTime(1.3,t);
-  g.gain.setTargetAtTime(0.0001,t+0.1,0.07);
-  o.connect(g); g.connect(bus); g.connect(rumSend);
-  o.start(t); o.stop(t+0.6);
-  noiseHit(t,0.012,'highpass',1800,.7,0.6);
-  rumDuck.gain.cancelScheduledValues(t);
-  rumDuck.gain.setValueAtTime(0,t);
-  rumDuck.gain.setTargetAtTime(1,t+0.07,0.05);
-}
-function perc(t,hz){
-  const o=ctx.createOscillator(), g=ctx.createGain();
-  o.type='triangle';
-  o.frequency.setValueAtTime(hz*1.9,t); o.frequency.exponentialRampToValueAtTime(hz,t+0.035);
-  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(0.6,t+0.003); g.gain.exponentialRampToValueAtTime(0.0001,t+0.17);
-  o.connect(g); g.connect(bus); o.start(t); o.stop(t+0.2);
-  noiseHit(t,0.03,'bandpass',3200,1.5,0.18);
-}
-function clap(t){
-  const s=ctx.createBufferSource(), f=ctx.createBiquadFilter(), g=ctx.createGain();
-  s.buffer=noise; f.type='bandpass'; f.frequency.value=1400; f.Q.value=.9;
-  g.gain.setValueAtTime(0,t);
-  [0,.011,.022].forEach(o=>{ g.gain.setValueAtTime(.75,t+o); g.gain.exponentialRampToValueAtTime(.08,t+o+.01); });
-  g.gain.setValueAtTime(.6,t+.033); g.gain.exponentialRampToValueAtTime(0.0001,t+.22);
-  s.connect(f); f.connect(g); g.connect(bus); s.start(t); s.stop(t+.25);
-}
-function hat(t,open){ noiseHit(t,open?0.11:0.035,'highpass',7500,.7,open?0.34:0.2); }
-function acid(t,note,dur,accent){
-  const o=ctx.createOscillator(), f=ctx.createBiquadFilter(), g=ctx.createGain();
-  o.type='sawtooth'; o.frequency.value=midiHz(note);
-  f.type='lowpass';
-  const base=(180+0.38*5600)*(accent?1.5:1);
-  f.Q.value=26*(accent?1.15:1);
-  f.frequency.setValueAtTime(base*3.2,t);
-  f.frequency.exponentialRampToValueAtTime(Math.max(base*.3,60),t+dur*(accent?1.1:.85));
-  g.gain.setValueAtTime(0.0001,t);
-  g.gain.exponentialRampToValueAtTime(accent?0.6:0.42,t+0.002);
-  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-  o.connect(f); f.connect(g); g.connect(bus);
-  o.start(t); o.stop(t+dur+.02);
-}
-function playhead(i){
-  if(lastCol) lastCol.forEach(c=>c.classList.remove('play'));
-  lastCol = i===null ? null : cols[i];
-  if(lastCol) lastCol.forEach(c=>c.classList.add('play'));
-}
-function schedule(){
-  const s16=60/(+bpmEl.value)/4;
-  while(nextT<ctx.currentTime+0.12){
-    const i=step%16, t=nextT;
-    const on=id=>laneOn[id] && cells[id][i].classList.contains('on');
-    const kicked=on('kick');
-    if(kicked) kick(t);
-    if(on('perc')) perc(t,TOM[i]||150);
-    if(on('clap')) clap(t);
-    if(on('hat')) hat(t,i%4===2);
-    if(on('acid')) acid(t,NOTES[i],s16*1.05,ACC[i]===1);
-    setTimeout(()=>{ if(!playing) return; playhead(i); if(kicked) thump(); },Math.max(0,(t-ctx.currentTime)*1000));
-    nextT+=s16; step++;
-  }
-}
-$('play').addEventListener('click',async()=>{
-  if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)(); buildGraph()}
-  await ctx.resume();
-  playing=!playing;
-  const btn=$('play');
-  if(playing){
-    btn.classList.add('on'); btn.textContent='■';
-    if(!window.__machineTracked){window.__machineTracked=1;track('machine-play')}
-    step=0; nextT=ctx.currentTime+0.06;
-    timer=setInterval(schedule,25);
-  }else{
-    btn.classList.remove('on'); btn.textContent='▶';
-    clearInterval(timer);
-    playhead(null);
-  }
-});
-loadPreset('schranz');
 
 /* language last, so every translatable node above exists */
 let _startLang='en';
