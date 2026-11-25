@@ -364,13 +364,13 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--dark-mute
   <div class="eyebrow reveal"><span class="no">01</span>Listen</div>
   <h2 class="reveal" style="--d:.08s">Mixes</h2>
   <div class="player reveal" style="--d:.14s" id="scPlayer">
-    <img class="sc-art" id="scArt" src="https://i1.sndcdn.com/artworks-YJXrVzTB8RQCnu8E-caS6AQ-t500x500.jpg" alt="Mix cover art">
+    <img class="sc-art" id="scArt" src="https://i1.sndcdn.com/artworks-ysa6UChIn0lrMfuF-374RMw-t500x500.jpg" alt="Mix cover art">
     <div class="sc-main">
       <div class="sc-top">
         <button class="sc-play" id="scPlay" aria-label="Play or pause the mix">▶</button>
         <div class="sc-info">
-          <div class="sc-title" id="scTitle">Maros – Mix 02</div>
-          <div class="sc-sub">Streaming via <a href="https://soundcloud.com/dj_maros/maros-mix-2" target="_blank" rel="noopener">SoundCloud</a></div>
+          <div class="sc-title" id="scTitle">Maros – Mix 03</div>
+          <div class="sc-sub">Streaming via <a href="https://soundcloud.com/dj_maros/rec3" target="_blank" rel="noopener">SoundCloud</a></div>
         </div>
         <div class="sc-time" id="scTime"><b>0:00</b> / 0:00</div>
       </div>
@@ -378,7 +378,7 @@ footer span{font-family:var(--mono);font-size:var(--fs-xs);color:var(--dark-mute
       <div class="mix-list" id="mixList"></div>
     </div>
     <iframe class="sc-hidden" id="scFrame" title="DJ Maros on SoundCloud" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay"
-      data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fdj_maros%2Fmaros-mix-2&auto_play=false&show_teaser=false"></iframe>
+      data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fdj_maros%2Frec3&auto_play=false&show_teaser=false"></iframe>
   </div>
 </section>
 
@@ -463,13 +463,13 @@ function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.co
   /* mix list — add a line to MIXES when a new mix drops and it appears below the player */
   const MIXES=[
     {title:'Maros – Acid Techno Mix 01', tag:'Acid mix', url:'https://soundcloud.com/dj_maros/mix01'},
-    {title:'Maros – Mix 02', tag:'Mix', url:'https://soundcloud.com/dj_maros/maros-mix-2'},
+    {title:'Maros – Mix 03', tag:'Mix', url:'https://soundcloud.com/dj_maros/rec3'},
     {title:'Credits Song for my Death — Schranz Rework', tag:'Rework', url:'https://soundcloud.com/dj_maros/son6formyd34th'},
     {title:'Maros – GI', tag:'New', url:'https://soundcloud.com/dj_maros/gi'}
     // {title:'…', tag:'Mix', url:'https://soundcloud.com/dj_maros/…'},
   ];
   const list=document.getElementById('mixList');
-  const START=1; // Mix 02 is loaded on arrival — keep the iframe data-src and the placeholder title/art in the markup in sync
+  const START=1; // Mix 03 is loaded on arrival — keep the iframe data-src and the placeholder title/art in the markup in sync
   let w=null, dur=0, current=START, booted=false, played=false;
   const fmt=ms=>{const s=Math.max(0,Math.round(ms/1000));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
   const setTime=pos=>{timeEl.innerHTML='<b>'+fmt(pos)+'</b> / '+fmt(dur)};
@@ -478,10 +478,8 @@ function track(name){ if(window.goatcounter && goatcounter.count) goatcounter.co
     w.getDuration(d=>{dur=d;setTime(0)});
     w.getCurrentSound(s=>{
       if(!s) return;
-      if(s.title){
-        document.getElementById('scTitle').textContent=s.title;
-        const row=list.children[current]; if(row) row.querySelector('.t').textContent=s.title;
-      }
+      const title=(MIXES[current]&&MIXES[current].title)||s.title; // prefer our names over SoundCloud upload titles like "rec3"
+      if(title) document.getElementById('scTitle').textContent=title;
       if(s.artwork_url) document.getElementById('scArt').src=s.artwork_url.replace('-large','-t500x500');
       const link=panel.querySelector('.sc-sub a'); if(link && s.permalink_url) link.href=s.permalink_url;
     });
@@ -604,7 +602,7 @@ const ES_TEXT=[
   ['.hero-meta div:nth-child(4) .k','Activo desde'],
   ['#listen .eyebrow','<span class="no">01</span>Escucha'],
   ['#listen h2','Sesiones'],
-  ['.sc-sub','En streaming vía <a href="https://soundcloud.com/dj_maros/maros-mix-2" target="_blank" rel="noopener">SoundCloud</a>'],
+  ['.sc-sub','En streaming vía <a href="https://soundcloud.com/dj_maros/rec3" target="_blank" rel="noopener">SoundCloud</a>'],
   ['#sets .eyebrow','<span class="no">02</span>Fechas'],
   ['#sets h2','Fechas Seleccionadas'],
   ['#bio h2','Sobre Mí'],
